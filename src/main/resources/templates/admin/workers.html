@@ -1,10 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Рабочие</title>
 </head>
 <body>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти"/>
+</form>
+<a th:href="@{/}">Главное меню</a>
 
+<h1>Рабочие</h1>
+
+<form th:action="@{/workers}" th:method="post" th:object="${newWorker}">
+    <label>
+        Имя:
+        <input type="text" th:field="*{name}" />
+    </label><br>
+    <label>
+        Фамилия:
+        <input type="text" th:field="*{surname}" />
+    </label><br>
+    <label>
+        Отчество:
+        <input type="text" th:field="*{patronomic}" />
+    </label><br>
+    <label>
+        Позиция:
+        <input type="text" th:field="*{position}" />
+    </label><br>
+    <label>
+        Ресторан:
+        <select th:field="*{restaurantId}">
+            <option th:each="restaurant :${listRestaurants}" th:value="${restaurant.getRestaurantId()}">
+                <span th:text="${restaurant.getRestaurantId()}"></span>
+            </option>
+        </select>
+    </label><br>
+    <input type="submit" value="Создать" />
+</form>
+
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Id рестарана</th>
+        <th>ФИО</th>
+        <th>Позиция</th>
+        <th></th>
+    </tr>
+    <tr th:each="worker :${workers}">
+        <td th:text="${worker.getWorkerId()}"></td>
+        <td th:text="${worker.getRestaurantId()}"></td>
+        <td>
+            <span th:text="${worker.getSurname()}"></span>
+            <span th:text="${worker.getName()}"></span>
+            <span th:text="${worker.getPatronomic()}"></span>
+        </td>
+        <td th:text="${worker.getPosition()}"></td>
+        <td>
+            <form
+                    th:method="delete"
+                    th:action="@{/workers/{id} (id = ${worker.getWorkerId()})}"
+                    style="display: inline"
+            >
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

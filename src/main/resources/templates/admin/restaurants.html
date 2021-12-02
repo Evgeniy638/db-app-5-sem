@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Рестораны</title>
 </head>
 <body>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти"/>
+</form>
+<a th:href="@{/}">Главное меню</a>
 
+<h1>Рестораны</h1>
+
+<form th:action="@{/restaurants}" th:method="post" th:object="${newRestaurant}">
+    <label>
+        Адрес:
+        <input type="text" th:field="*{address}" />
+    </label><br>
+    <input type="submit" value="Создать" />
+</form>
+
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Адрес</th>
+        <th></th>
+    </tr>
+    <tr th:each="restaurant :${restaurants}">
+        <td th:text="${restaurant.getRestaurantId()}"></td>
+        <td th:text="${restaurant.getAddress()}"></td>
+        <td>
+            <form
+                    th:method="delete"
+                    th:action="@{/restaurants/{id} (id = ${restaurant.getRestaurantId()})}"
+                    style="display: inline"
+            >
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
