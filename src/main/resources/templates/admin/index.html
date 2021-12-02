@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Доставка блюд из ресторанов</title>
+</head>
+<body>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Выйти"/>
+    </form>
+
+    <h1>Доставка блюд из ресторанов</h1>
+
+    <ul>
+        <li>
+            <a th:href="@{/clients}">
+                Клиенты
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/dishes}">
+                Блюда
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/orders}">
+                Заказы
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/restaurants}">
+                Рестараны
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/workers}">
+                Рабочие
+            </a>
+        </li>
+    </ul>
+</body>
+</html>
