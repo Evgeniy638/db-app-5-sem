@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Dish {
-    private Integer cookId;
+    private Integer dishId;
     private String name;
     private String description;
 }

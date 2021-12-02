@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Блюда</title>
+</head>
+<body>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти"/>
+</form>
+
+<h1>Блюда</h1>
+
+<form th:action="@{/dishes}" th:method="post" th:object="${newDish}">
+    <label>
+        Имя:
+        <input type="text" th:field="*{name}" />
+    </label><br>
+    <label>
+        Описание:
+        <input type="text" th:field="*{description}" />
+    </label><br>
+    <input type="submit" value="Создать" />
+</form>
+
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Название</th>
+        <th>Описание</th>
+        <th></th>
+    </tr>
+    <tr th:each="dish :${dishes}">
+        <td th:text="${dish.getDishId()}"></td>
+        <td th:text="${dish.getName()}"></td>
+        <td th:text="${dish.getDescription()}"></td>
+        <td>
+            <form
+                    th:method="delete"
+                    th:action="@{/dishes/{id} (id = ${dish.getDishId()})}"
+                    style="display: inline"
+            >
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
