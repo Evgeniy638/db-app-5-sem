@@ -1,22 +1,24 @@
 package com.example.dbapp5sem.controllers;
 
 import com.example.dbapp5sem.modules.Client;
-import com.example.dbapp5sem.repositories.ClientRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class AdminController {
-    private final ClientRepository clientRepository;
+    private final JdbcTemplate jdbcTemplate;
 
     @GetMapping("/")
     public String admin() {
-        Client client = new Client();
-        client.setName("name");
+        List<Client> clients = jdbcTemplate.query("SELECT * FROM Client", new BeanPropertyRowMapper<>(Client.class));
 
-        clientRepository.save(client);
+        System.out.println(clients);
 
         return "admin";
     }
