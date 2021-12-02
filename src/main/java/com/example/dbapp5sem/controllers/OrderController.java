@@ -1,0 +1,22 @@
+package com.example.dbapp5sem.controllers;
+
+import com.example.dbapp5sem.services.OrderService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/orders")
+@RequiredArgsConstructor
+public class OrderController {
+    private final OrderService orderService;
+
+    @GetMapping
+    public String index(Model model) {
+        model.addAttribute("orders", orderService.findAll());
+
+        return "admin/orders";
+    }
+}

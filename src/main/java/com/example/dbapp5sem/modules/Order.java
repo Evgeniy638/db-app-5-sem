@@ -9,4 +9,6 @@ public class Order {
     private Boolean isPaid;
     private Double playmentAmount;
     private String status;
+    private Integer clientId;
+    private Integer workerId;
 }

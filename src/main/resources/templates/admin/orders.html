@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказы</title>
+</head>
+<body>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти"/>
+</form>
+
+<h1>Заказы</h1>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Id клиента</th>
+        <th>Id рабочего</th>
+        <th>Адрес заказа</th>
+        <th>Оплачен</th>
+        <th>Сумма оплата</th>
+        <th>Статус</th>
+    </tr>
+    <tr th:each="order :${orders}">
+        <td th:text="${order.getOrderId()}"></td>
+        <td th:text="${order.getClientId()}"></td>
+        <td th:text="${order.getWorkerId()}"></td>
+        <td th:text="${order.getDeliveryAddress()}"></td>
+        <td>
+            <span th:if="${order.getIsPaid()}">
+                Да
+            </span>
+            <span th:if="${!order.getIsPaid()}">
+                Нет
+            </span>
+        </td>
+        <td>
+            <span th:text="${order.getPlaymentAmount()}"></span>&#8381;
+        </td>
+        <td th:text="${order.getStatus()}"></td>
+    </tr>
+</table>
+</body>
+</html>
